@@ -28,6 +28,7 @@ import glob
 
 ########### Local $FGROOT/Nasal/ path ##########
 NASAL_PATH="../fgfs/fgdata/Nasal/"
+OUTPUT_PATH="./out"
 
 def get_files(nasal_dir):
     ''' Scans for all nasal files and generates documents '''
@@ -73,7 +74,13 @@ def get_files(nasal_dir):
 
 def output_text(top_namespaces,modules,version):
     ''' Ouputs the text, namespaces, modules to html files '''
-    fw=open('./nasal_api_doc.html','wb')
+    try:
+        if not os.path.exists(OUTPUT_PATH):
+            os.mkdir(OUTPUT_PATH)
+    except NotADirectoryError as e:
+        print("Could not create output directory:", OUTPUT_PATH, e)
+        sys.exit(1)
+    fw=open(OUTPUT_PATH + 'nasal_api_doc-' + version + '.html','wb')
     buf='<html><head>\
     <title>Nasal API</title>\
     <style>\n\
@@ -144,10 +151,12 @@ def output_text(top_namespaces,modules,version):
     buf+='</body></html>'
     fw.write(buf.encode('utf8'))
     fw.close()
+    print("Generated file", fw.name)
+
 
 def parse_file(filename):
     ''' Parses a nasal file to search for keywords and docstrings '''
-    fr=open(filename,'r', encoding='uft-8')
+    fr=open(filename,'r', encoding='utf-8')
     content=fr.readlines()
     i=0
     retval=[]
@@ -281,25 +290,32 @@ def parse_file(filename):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description=(
-            "Auto generates Nasal API documentation from FlightGear's nasal scripts."
-        ),
-        usage="nasal_api_doc.py [options] [command]",
+        description="Auto generates Nasal API documentation from FlightGear's nasal scripts."
     )
 
     parser.add_argument(
-        "-fg-root",
+        "-f", "--fg-root",
         metavar="PATH",
         help="The desired FlightGear data folder (defaults to ../fgfs/fgdata/Nasal/).",
-        default=None,
+        default="../fgfs/fgdata/Nasal/",
     )
+
+    parser.add_argument(
+        "-o", "--output",
+        metavar="PATH",
+        help="The desired output folder (defaults to the script folder).",
+        default="./out",
+    )
+
+    if len(sys.argv) == 1: # Show help if no arguments
+        parser.print_help()
+        sys.exit(1)
 
     args = parser.parse_args()
 
-    if len(sys.argv) < 2:
-        parser.print_help()
-        sys.exit()
+    NASAL_PATH = args.fg_root
+    OUTPUT_PATH = args.output
+    if OUTPUT_PATH[-1] != '/':
+        OUTPUT_PATH += '/'
 
-    # Handle the fg-root argument
-    nasal_path = args.fg_root if args.fg_root else NASAL_PATH
-    get_files(nasal_path)
+    get_files(nasal_dir=NASAL_PATH)

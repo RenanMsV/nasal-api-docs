@@ -7,7 +7,11 @@ Original python2 script by @2012 Adrian Musceac
 ## How to execute:
 
 Run the **Python 3** console command below:
-
 ```bash
-python3 nasal_api_doc_py3.py parse /path/to/FlightGear/data
+python3 nasal_api_doc.py -f /path/to/FlightGear/data
+```
+
+For more info about the commands:
+```bash
+python3 nasal_api_doc.py --help
 ```
