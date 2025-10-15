@@ -23,6 +23,7 @@ located inside $FGROOT/Nasal/"""
 import os
 import sys
 import re
+import time
 import argparse
 import glob
 
@@ -80,9 +81,10 @@ def output_text(top_namespaces,modules,version):
     except NotADirectoryError as e:
         print("Could not create output directory:", OUTPUT_PATH, e)
         sys.exit(1)
+    timestring = time.strftime("%m-%d-%Y %I-%M-%S%p")
     fw=open(OUTPUT_PATH + 'nasal_api_doc-' + version + '.html','wb')
     buf='<html><head>\
-    <title>Nasal API</title>\
+    <title>Nasal API - ' + version + '</title>\
     <style>\n\
     a.main_module_link {margin-left:30px;display:block;float:left;}\
     div.container {background-color:#eee;clear:left;margin-top:20px;}\
@@ -97,9 +99,10 @@ def output_text(top_namespaces,modules,version):
 
     buf+='<h1 style="padding-left:20px;display:block;color:#fff;background-color:#555588;">\
     Nasal $FGROOT Library<br/><span style="font-size:12px;">Flightgear version: '+version+'\
-    <br/>This file is generated automatically by scripts/python/nasal_api_doc.py\
+    <br/>This file is generated automatically by nasal_api_doc.py at ' + timestring + '\
     </span></h1>\
-    <br/><a href="http://plausible.org/nasal">Nasal documentation</a>&nbsp;&nbsp;\
+    <br/><a href="http://plausible.org/nasal">Nasal documentation</a>\
+    <a href="https://web.archive.org/web/20160817183633/https://plausible.org/nasal/">[mirror]</a>&nbsp;&nbsp;\
     <a href="http://wiki.flightgear.org/Nasal_scripting_language">Flightgear Nasal documentation</a>\n<div style="float:right;">&nbsp;'
     buf+='<h2 style="font-size:14px;height:450px;width:250px;overflow:scroll;display:block;position:fixed;top:20px;right:20px;background-color:#8888AC;border:1px solid black;">\n'
     done=[]
@@ -309,7 +312,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 1: # Show help if no arguments
         parser.print_help()
-        sys.exit(1)
+        sys.exit()
 
     args = parser.parse_args()
 
