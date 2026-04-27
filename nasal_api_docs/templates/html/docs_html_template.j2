@@ -1,0 +1,102 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nasal API - {{ fg_version }}</title>
+    <link rel="icon" type="image/x-icon" href="https://wiki.flightgear.org/w/images/6/68/Nasal_logo_single_letter.png">
+    <style>
+        {% include "docs_html_template.css" %}
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="page_title">
+        Nasal $FGROOT Library<br/>
+        <span>
+            FlightGear version: {{ fg_version }} .<br/>
+            This file was generated automatically by nasal-api-docs at {{ timestamp }} .<br/>
+            nasal-api-docs v{{ version }} | Parser v{{ parser_version }} | Python v{{ python_version }} .
+        </span>
+    </h1>
+    <button class="info_links">
+        <a target="_blank" href="https://github.com/RenanMsV/nasal-api-docs">Repository</a>
+    </button>
+    <button class="info_links">
+        <a target="_blank" href="http://plausible.org/nasal">Plausible.org</a>
+    </button>
+    <button class="info_links">
+        <a target="_blank" href="https://web.archive.org/web/20160817183633/https://plausible.org/nasal/">[mirror]</a>
+    </button>
+    <button class="info_links">
+        <a target="_blank" href="http://wiki.flightgear.org/Nasal_scripting_language">FlightGear Nasal wiki</a>
+    </button>
+
+    {% include "toggle_theme_button.j2" %}
+
+    <div class="right_namespace_menu">&nbsp;
+        <h2>
+        {% macro render_namespace_links(namespaces, level=0) %}
+        {% for namespace in namespaces %}
+            <div style="{% if level > 0 %}margin-left: {{ level * 15 }}px;{% endif %}">
+                <a class="main_module_link" href="#{{ namespace.id }}">{{ namespace.icon | safe }} {{ namespace.name }}</a>
+                <br/>
+            </div>
+            {# Recursive call for submodules inside this namespace’s items #}
+            {% for child in namespace.children %}
+                {{ render_namespace_links([child], level + 1) }}
+            {% endfor %}
+        {% endfor %}
+        {% endmacro %}
+
+        {{ render_namespace_links(tree) }}
+        </h2>
+    </div>
+
+{% macro render_args(args) %}
+{% for arg in args %}
+<span class="arg">{{ arg.strip() }}</span>{% if not loop.last %}, {% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro render_comments(comments) %}
+{% for comment in comments %}
+        <div class="comments">{{ comment | e }}</div><br/>
+{% endfor %}
+{% endmacro %}
+
+{% macro render_namespace(namespace, level=0) %}
+
+<div class="container" style="{% if level > 0 %}margin-left: {{ level * 15 }}px;{% endif %}">
+    <h2 class="namespace_title">
+        <a name="{{ namespace.id }}">{{ namespace.icon | safe }} {{ namespace.name }}</a>
+        <span class="rel_path">&nbsp;&nbsp;&nbsp;&nbsp;{{ namespace.rel_path }}</span>
+    </h2>
+
+    {% for function in namespace.functions %}
+    {% if function.type == 'class_definition' %}
+    <div>
+        <h4 class="class_definition">
+            <b>{{ namespace.name }}</b>.<b><i><u>{{ function.name }}</u></i></b>
+        </h4>
+        {{render_comments(function.comments)}}
+    </div>
+
+    {% elif function.type == 'function' %}
+    <div>
+        <h4 class="function">
+            <b>{{ namespace.name }}</b>.<b>{{ function.name }}</b> ( {{ render_args(function.args) }} )
+        </h4>
+        {{ render_comments(function.comments) }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% for child in namespace.children %}
+    {{ render_namespace(child, level + 1) }}
+    {% endfor %}
+</div>
+{% endmacro %}
+
+    {% for namespace in tree %}
+        {{ render_namespace(namespace) }}
+    {% endfor %}
+</body>
+</html>

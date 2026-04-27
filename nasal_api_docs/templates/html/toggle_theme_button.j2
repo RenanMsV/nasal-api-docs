@@ -1,0 +1,49 @@
+<span class="toggle-btn-span">
+    &nbsp;&nbsp;&nbsp;&nbsp;Theme:&nbsp;&nbsp;
+    <button id="theme-toggle" class="toggle-btn">Light</button>
+</span>
+
+<style>
+.toggle-btn-span{
+    color: var(--comments);
+}
+.toggle-btn {
+    background-color: var(--purple);
+    color: var(--white-color);
+    border: none;
+    border-radius: 2px;
+    padding: 4px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.toggle-btn:hover {
+    background-color: var(--purple-light);
+    transform: scale(1.02);
+}
+</style>
+
+<script>
+    const btn = document.querySelector('#theme-toggle');
+    let isDark = false;
+
+    btn.addEventListener('click', () => {
+        const root = document.documentElement;
+        const mode = isDark ? 'lt' : 'dk';
+
+        root.style.setProperty('--white-color', `var(--white-color-${mode})`);
+        root.style.setProperty('--white-color-light', `var(--white-color-light-${mode})`);
+        root.style.setProperty('--purple', `var(--purple-${mode})`);
+        root.style.setProperty('--purple-light', `var(--purple-light-${mode})`);
+        root.style.setProperty('--purple-bold', `var(--purple-bold-${mode})`);
+        root.style.setProperty('--class-definition', `var(--class-definition-${mode})`);
+        root.style.setProperty('--function', `var(--function-${mode})`);
+        root.style.setProperty('--args', `var(--args-${mode})`);
+        root.style.setProperty('--comments', `var(--comments-${mode})`);
+        root.style.setProperty('--background', `var(--background-${mode})`);
+
+        isDark = !isDark;
+        btn.textContent = isDark ? 'Dark' : 'Light';
+    });
+</script>
