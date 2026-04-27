@@ -1,17 +1,38 @@
-# Nasal API Docs Generator
+# Nasal API Docs
 
 Auto generates Nasal API documentation from FlightGear's nasal scripts.
 
-Original python2 script by @2012 Adrian Musceac
+* Original python2 script by Adrian Musceac @2012.
+* Refactored into a package by RenanMsV @2019-2026.
 
-## How to execute:
+---
 
-Run the **Python 3** console command below:
+### Latest generated docs
+
+📃 View the latest docs here: [nasal-api-docs/latest](https://renanmsv.github.io/nasal-api-docs/latest).
+
+---
+
+### Requirements
+
+- Requires **Python 3.7** or newer.
+
+- Uses [Jinja2](https://pypi.org/project/Jinja2/) module to generate the HTML.
+To install Jinja2 run the console command below:
+    ```bash
+    pip install jinja2
+    ```
+
+---
+
+### How to install and run:
+
+Install with:
 ```bash
-python3 nasal_api_doc.py -f /path/to/FlightGear/data
+pip install .
 ```
 
-For more info about the commands:
+Run the command:
 ```bash
-python3 nasal_api_doc.py --help
+nasal-api-docs -f /path/to/FlightGear/data -o /path/to/output/
 ```
