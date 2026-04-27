@@ -27,7 +27,7 @@ from typing import List
 from platform import python_version as pl_python_version
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from . import __version__
+from . import __version__  # pylint: disable=cyclic-import
 from .filesystem import NasalFileSystem
 from .parser import NasalParser
 
