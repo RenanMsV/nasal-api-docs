@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "View output in a local http server",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "${command:python.interpreterPath}",
+            "args": [
+                "-m",
+                "http.server",
+                "8000",
+                "-d",
+                "out",
+                "-b",
+                "127.0.0.1"
+            ]
+        },
+        {
+            "label": "Test package",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "${command:python.interpreterPath}",
+            "args": [
+                "-m",
+                "pytest",
+                "--basetemp=tmp"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
