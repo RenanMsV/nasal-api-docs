@@ -1,9 +1,11 @@
 # Python
 **__pycache__**
 **.pytest_cache**
+.pypirc
 
 # Vev
-**venv**
+.venv
+venv
 
 # Pip
 *.egg-info
@@ -14,7 +16,7 @@
 # Project
 out
 backups
-**nasal_tree.json**
 FGROOT
 tmp
 build
+dist
