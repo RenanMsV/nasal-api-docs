@@ -41,10 +41,10 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://renanmsv.github.io/nasal-api-docs/"
-Documentation = "https://renanmsv.github.io/nasal-api-docs/latest/"
+Documentation = "https://github.com/RenanMsV/nasal-api-docs/wiki"
 Repository = "https://github.com/RenanMsV/nasal-api-docs.git"
 Issues = "https://github.com/RenanMsV/nasal-api-docs/issues"
-Changelog = "https://github.com/RenanMsV/nasal-api-docs/CHANGELOG.md"
+Changelog = "https://github.com/RenanMsV/nasal-api-docs/blob/main/CHANGELOG.md"
 
 [project.scripts]
 nasal-api-docs = "nasal_api_docs.__main__:main"
