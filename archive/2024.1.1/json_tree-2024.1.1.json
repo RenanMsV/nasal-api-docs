@@ -9,7 +9,7 @@
   "data": [
     {
       "name": "addons",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/addons.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -104,7 +104,7 @@
     },
     {
       "name": "aircraft",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/aircraft.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -1145,7 +1145,7 @@
     },
     {
       "name": "annunciators",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/annunciators.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -1154,7 +1154,7 @@
     },
     {
       "name": "aurora",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/aurora.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -1211,7 +1211,7 @@
     },
     {
       "name": "Autopush",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/Autopush/",
       "is_module": true,
       "icon": "&#128193;",
@@ -1219,7 +1219,7 @@
       "children": [
         {
           "name": "autopush",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\Autopush",
+          "path": "Nasal\\Autopush",
           "rel_path": "Nasal/Autopush/autopush.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -1247,7 +1247,7 @@
         },
         {
           "name": "driver",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\Autopush",
+          "path": "Nasal\\Autopush",
           "rel_path": "Nasal/Autopush/driver.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -1295,7 +1295,7 @@
         },
         {
           "name": "dynarr",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\Autopush",
+          "path": "Nasal\\Autopush",
           "rel_path": "Nasal/Autopush/dynarr.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -1304,7 +1304,7 @@
         },
         {
           "name": "route",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\Autopush",
+          "path": "Nasal\\Autopush",
           "rel_path": "Nasal/Autopush/route.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -1448,7 +1448,7 @@
     },
     {
       "name": "bits",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/bits.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -1537,7 +1537,7 @@
     },
     {
       "name": "canvas",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/canvas/",
       "is_module": true,
       "icon": "&#128193;",
@@ -1545,7 +1545,7 @@
       "children": [
         {
           "name": "api",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/api/",
           "is_module": true,
           "icon": "&#128193;",
@@ -1553,7 +1553,7 @@
           "children": [
             {
               "name": "canvas",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/canvas.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -1657,7 +1657,7 @@
             },
             {
               "name": "colors",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/colors.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -1666,7 +1666,7 @@
             },
             {
               "name": "element",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/element.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -1950,7 +1950,7 @@
             },
             {
               "name": "group",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/group.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -2112,7 +2112,7 @@
             },
             {
               "name": "helpers",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/helpers.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -2140,7 +2140,7 @@
             },
             {
               "name": "image",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/image.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -2207,7 +2207,7 @@
             },
             {
               "name": "map",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/map.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -2390,7 +2390,7 @@
             },
             {
               "name": "path",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/path.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -2893,7 +2893,7 @@
             },
             {
               "name": "svgcanvas",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/svgcanvas.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -3087,7 +3087,7 @@
             },
             {
               "name": "text",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/text.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -3290,7 +3290,7 @@
             },
             {
               "name": "transform",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\api",
+              "path": "Nasal\\canvas\\api",
               "rel_path": "Nasal/canvas/api/transform.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -3383,7 +3383,7 @@
         },
         {
           "name": "api",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/api.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -3485,7 +3485,7 @@
         },
         {
           "name": "draw",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/draw/",
           "is_module": true,
           "icon": "&#128193;",
@@ -3493,7 +3493,7 @@
           "children": [
             {
               "name": "compass",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\draw",
+              "path": "Nasal\\canvas\\draw",
               "rel_path": "Nasal/canvas/draw/compass.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -3566,7 +3566,7 @@
             },
             {
               "name": "draw",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\draw",
+              "path": "Nasal\\canvas\\draw",
               "rel_path": "Nasal/canvas/draw/draw.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -3923,7 +3923,7 @@
             },
             {
               "name": "scales",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\draw",
+              "path": "Nasal\\canvas\\draw",
               "rel_path": "Nasal/canvas/draw/scales.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4032,7 +4032,7 @@
             },
             {
               "name": "transform",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\draw",
+              "path": "Nasal\\canvas\\draw",
               "rel_path": "Nasal/canvas/draw/transform.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4200,7 +4200,7 @@
         },
         {
           "name": "draw",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/draw.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -4235,7 +4235,7 @@
         },
         {
           "name": "ErrorNotification",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/ErrorNotification.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -4261,7 +4261,7 @@
         },
         {
           "name": "gui",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/gui/",
           "is_module": true,
           "icon": "&#128193;",
@@ -4269,7 +4269,7 @@
           "children": [
             {
               "name": "Config",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/Config.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4311,7 +4311,7 @@
             },
             {
               "name": "dialogs",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/dialogs/",
               "is_module": true,
               "icon": "&#128193;",
@@ -4319,7 +4319,7 @@
               "children": [
                 {
                   "name": "AircraftCenter",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\dialogs",
+                  "path": "Nasal\\canvas\\gui\\dialogs",
                   "rel_path": "Nasal/canvas/gui/dialogs/AircraftCenter.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -4372,7 +4372,7 @@
                 },
                 {
                   "name": "InputDialog",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\dialogs",
+                  "path": "Nasal\\canvas\\gui\\dialogs",
                   "rel_path": "Nasal/canvas/gui/dialogs/InputDialog.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -4446,7 +4446,7 @@
                 },
                 {
                   "name": "MessageBox",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\dialogs",
+                  "path": "Nasal\\canvas\\gui\\dialogs",
                   "rel_path": "Nasal/canvas/gui/dialogs/MessageBox.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -4606,7 +4606,7 @@
                 },
                 {
                   "name": "PropertyTreeBrowser",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\dialogs",
+                  "path": "Nasal\\canvas\\gui\\dialogs",
                   "rel_path": "Nasal/canvas/gui/dialogs/PropertyTreeBrowser.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -4668,7 +4668,7 @@
                 },
                 {
                   "name": "WidgetsFactoryDialog",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\dialogs",
+                  "path": "Nasal\\canvas\\gui\\dialogs",
                   "rel_path": "Nasal/canvas/gui/dialogs/WidgetsFactoryDialog.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -4719,7 +4719,7 @@
             },
             {
               "name": "Menu",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/Menu.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4728,7 +4728,7 @@
             },
             {
               "name": "MenuBar",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/MenuBar.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4737,7 +4737,7 @@
             },
             {
               "name": "Overlay",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/Overlay.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4746,7 +4746,7 @@
             },
             {
               "name": "Popup",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/Popup.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4755,7 +4755,7 @@
             },
             {
               "name": "Style",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/Style.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -4764,7 +4764,7 @@
             },
             {
               "name": "styles",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/styles/",
               "is_module": true,
               "icon": "&#128193;",
@@ -4772,7 +4772,7 @@
               "children": [
                 {
                   "name": "DefaultStyle",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\styles",
+                  "path": "Nasal\\canvas\\gui\\styles",
                   "rel_path": "Nasal/canvas/gui/styles/DefaultStyle.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -5657,7 +5657,7 @@
             },
             {
               "name": "Widget",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/Widget.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -5666,7 +5666,7 @@
             },
             {
               "name": "widgets",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui",
+              "path": "Nasal\\canvas\\gui",
               "rel_path": "Nasal/canvas/gui/widgets/",
               "is_module": true,
               "icon": "&#128193;",
@@ -5674,7 +5674,7 @@
               "children": [
                 {
                   "name": "Button",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Button.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -5683,7 +5683,7 @@
                 },
                 {
                   "name": "CdlgWidgets",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/CdlgWidgets.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6162,7 +6162,7 @@
                 },
                 {
                   "name": "CheckBox",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/CheckBox.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6171,7 +6171,7 @@
                 },
                 {
                   "name": "ComboBox",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/ComboBox.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6180,7 +6180,7 @@
                 },
                 {
                   "name": "Dial",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Dial.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6189,7 +6189,7 @@
                 },
                 {
                   "name": "Frame",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Frame.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6198,7 +6198,7 @@
                 },
                 {
                   "name": "Label",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Label.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6207,7 +6207,7 @@
                 },
                 {
                   "name": "LineEdit",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/LineEdit.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6216,7 +6216,7 @@
                 },
                 {
                   "name": "List",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/List.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6225,7 +6225,7 @@
                 },
                 {
                   "name": "MenuBar",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/MenuBar.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6234,7 +6234,7 @@
                 },
                 {
                   "name": "PropertyTree",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/PropertyTree.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6243,7 +6243,7 @@
                 },
                 {
                   "name": "PropertyWidgets",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/PropertyWidgets.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6252,7 +6252,7 @@
                 },
                 {
                   "name": "RadioButton",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/RadioButton.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6261,7 +6261,7 @@
                 },
                 {
                   "name": "Rule",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Rule.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6270,7 +6270,7 @@
                 },
                 {
                   "name": "ScrollArea",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/ScrollArea.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6279,7 +6279,7 @@
                 },
                 {
                   "name": "Slider",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Slider.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6288,7 +6288,7 @@
                 },
                 {
                   "name": "Switch",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/Switch.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6297,7 +6297,7 @@
                 },
                 {
                   "name": "TabWidget",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\gui\\widgets",
+                  "path": "Nasal\\canvas\\gui\\widgets",
                   "rel_path": "Nasal/canvas/gui/widgets/TabWidget.nas",
                   "is_module": false,
                   "icon": "&#128196;",
@@ -6310,7 +6310,7 @@
         },
         {
           "name": "gui",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/gui.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -6654,7 +6654,7 @@
         },
         {
           "name": "ImageTest",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/ImageTest.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -6676,7 +6676,7 @@
         },
         {
           "name": "KeyBinding",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/KeyBinding.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -6714,7 +6714,7 @@
         },
         {
           "name": "map",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/map/",
           "is_module": true,
           "icon": "&#128193;",
@@ -6722,7 +6722,7 @@
           "children": [
             {
               "name": "Airbus",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\map",
+              "path": "Nasal\\canvas\\map",
               "rel_path": "Nasal/canvas/map/Airbus/",
               "is_module": true,
               "icon": "&#128193;",
@@ -6730,7 +6730,7 @@
               "children": [
                 {
                   "name": "Images",
-                  "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\map\\Airbus",
+                  "path": "Nasal\\canvas\\map\\Airbus",
                   "rel_path": "Nasal/canvas/map/Airbus/Images/",
                   "is_module": true,
                   "icon": "&#128193;",
@@ -6741,7 +6741,7 @@
             },
             {
               "name": "Images",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\map",
+              "path": "Nasal\\canvas\\map",
               "rel_path": "Nasal/canvas/map/Images/",
               "is_module": true,
               "icon": "&#128193;",
@@ -6752,7 +6752,7 @@
         },
         {
           "name": "map",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/map.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -7214,7 +7214,7 @@
         },
         {
           "name": "MapDrivers",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/MapDrivers.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -7424,7 +7424,7 @@
         },
         {
           "name": "MapStructure",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/MapStructure.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -8710,7 +8710,7 @@
         },
         {
           "name": "MFD_Generic",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/MFD_Generic.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -8719,7 +8719,7 @@
         },
         {
           "name": "PFD",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/PFD/",
           "is_module": true,
           "icon": "&#128193;",
@@ -8727,7 +8727,7 @@
           "children": [
             {
               "name": "DataEntryElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/DataEntryElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8736,7 +8736,7 @@
             },
             {
               "name": "DefaultStyle",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/DefaultStyle.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8754,7 +8754,7 @@
             },
             {
               "name": "GroupElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/GroupElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8763,7 +8763,7 @@
             },
             {
               "name": "HighlightElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/HighlightElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8772,7 +8772,7 @@
             },
             {
               "name": "HighlightTimer",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/HighlightTimer.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8816,7 +8816,7 @@
             },
             {
               "name": "PointerElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/PointerElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8825,7 +8825,7 @@
             },
             {
               "name": "RotatingElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/RotatingElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8834,7 +8834,7 @@
             },
             {
               "name": "ScrollElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/ScrollElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8843,7 +8843,7 @@
             },
             {
               "name": "TextElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/TextElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8852,7 +8852,7 @@
             },
             {
               "name": "UIElement",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas\\PFD",
+              "path": "Nasal\\canvas\\PFD",
               "rel_path": "Nasal/canvas/PFD/UIElement.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -8863,7 +8863,7 @@
         },
         {
           "name": "PropertyElement",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/PropertyElement.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -8982,7 +8982,7 @@
         },
         {
           "name": "svg",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/svg.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -9009,7 +9009,7 @@
         },
         {
           "name": "tooltip",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\canvas",
+          "path": "Nasal\\canvas",
           "rel_path": "Nasal/canvas/tooltip.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -9269,7 +9269,7 @@
     },
     {
       "name": "checklist",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/checklist.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -9288,7 +9288,7 @@
     },
     {
       "name": "console",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/console/",
       "is_module": true,
       "icon": "&#128193;",
@@ -9296,7 +9296,7 @@
       "children": [
         {
           "name": "repl",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\console",
+          "path": "Nasal\\console",
           "rel_path": "Nasal/console/repl.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -9557,7 +9557,7 @@
     },
     {
       "name": "contrail",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/contrail.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -9566,7 +9566,7 @@
     },
     {
       "name": "controls",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/controls.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -10062,7 +10062,7 @@
     },
     {
       "name": "debug",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/debug/",
       "is_module": true,
       "icon": "&#128193;",
@@ -10070,7 +10070,7 @@
       "children": [
         {
           "name": "emesary.deb",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\debug",
+          "path": "Nasal\\debug",
           "rel_path": "Nasal/debug/emesary.deb.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -10088,7 +10088,7 @@
     },
     {
       "name": "debug",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/debug.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -10876,7 +10876,7 @@
     },
     {
       "name": "dynamic_view",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/dynamic_view.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11182,7 +11182,7 @@
     },
     {
       "name": "earthview",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/earthview.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11327,7 +11327,7 @@
     },
     {
       "name": "emesary",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/emesary.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11371,7 +11371,7 @@
     },
     {
       "name": "emesary_mp_bridge",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/emesary_mp_bridge.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11380,7 +11380,7 @@
     },
     {
       "name": "emexec",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/emexec.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11519,7 +11519,7 @@
     },
     {
       "name": "environment",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/environment.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11563,7 +11563,7 @@
     },
     {
       "name": "events",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/events.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -11616,7 +11616,7 @@
     },
     {
       "name": "FailureMgr",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/FailureMgr/",
       "is_module": true,
       "icon": "&#128193;",
@@ -11624,7 +11624,7 @@
       "children": [
         {
           "name": "private",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\FailureMgr",
+          "path": "Nasal\\FailureMgr",
           "rel_path": "Nasal/FailureMgr/private.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -11887,7 +11887,7 @@
         },
         {
           "name": "public",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\FailureMgr",
+          "path": "Nasal\\FailureMgr",
           "rel_path": "Nasal/FailureMgr/public.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -12249,7 +12249,7 @@
     },
     {
       "name": "frame_utils",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/frame_utils.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -12258,7 +12258,7 @@
     },
     {
       "name": "fuel",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/fuel.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -12280,7 +12280,7 @@
     },
     {
       "name": "geo",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/geo.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -12702,7 +12702,7 @@
     },
     {
       "name": "glide_slope_tunnel",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/glide_slope_tunnel.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -12748,7 +12748,7 @@
     },
     {
       "name": "globals",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/globals.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -12924,7 +12924,7 @@
     },
     {
       "name": "gui",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/gui/",
       "is_module": true,
       "icon": "&#128193;",
@@ -12932,7 +12932,7 @@
       "children": [
         {
           "name": "MenuBar",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\gui",
+          "path": "Nasal\\gui",
           "rel_path": "Nasal/gui/MenuBar.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -12992,7 +12992,7 @@
         },
         {
           "name": "XMLDialog",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\gui",
+          "path": "Nasal\\gui",
           "rel_path": "Nasal/gui/XMLDialog.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -13396,7 +13396,7 @@
     },
     {
       "name": "gui",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/gui.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -14061,7 +14061,7 @@
     },
     {
       "name": "input_helpers",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/input_helpers/",
       "is_module": true,
       "icon": "&#128193;",
@@ -14069,7 +14069,7 @@
       "children": [
         {
           "name": "config_manager",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\input_helpers",
+          "path": "Nasal\\input_helpers",
           "rel_path": "Nasal/input_helpers/config_manager.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -14078,7 +14078,7 @@
         },
         {
           "name": "goflight",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\input_helpers",
+          "path": "Nasal\\input_helpers",
           "rel_path": "Nasal/input_helpers/goflight.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -14269,7 +14269,7 @@
         },
         {
           "name": "honeycomb",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\input_helpers",
+          "path": "Nasal\\input_helpers",
           "rel_path": "Nasal/input_helpers/honeycomb.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -14372,7 +14372,7 @@
     },
     {
       "name": "io",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/io.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -14584,7 +14584,7 @@
     },
     {
       "name": "jetways",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/jetways/",
       "is_module": true,
       "icon": "&#128193;",
@@ -14592,7 +14592,7 @@
       "children": [
         {
           "name": "jetways",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\jetways",
+          "path": "Nasal\\jetways",
           "rel_path": "Nasal/jetways/jetways.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -15000,7 +15000,7 @@
     },
     {
       "name": "jetways_edit",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/jetways_edit/",
       "is_module": true,
       "icon": "&#128193;",
@@ -15008,7 +15008,7 @@
       "children": [
         {
           "name": "jetways_edit",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\jetways_edit",
+          "path": "Nasal\\jetways_edit",
           "rel_path": "Nasal/jetways_edit/jetways_edit.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -15087,7 +15087,7 @@
     },
     {
       "name": "joystick",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/joystick.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -15693,7 +15693,7 @@
     },
     {
       "name": "lag_adjust",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/lag_adjust.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -15738,7 +15738,7 @@
     },
     {
       "name": "local_weather",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/local_weather/",
       "is_module": true,
       "icon": "&#128193;",
@@ -15746,7 +15746,7 @@
       "children": [
         {
           "name": "cloud_definitions",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/cloud_definitions.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -15779,7 +15779,7 @@
         },
         {
           "name": "cloud_placement_lowlevel",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/cloud_placement_lowlevel.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -15950,7 +15950,7 @@
         },
         {
           "name": "compat_layer",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/compat_layer.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -16317,7 +16317,7 @@
         },
         {
           "name": "local_weather",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/local_weather.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -17442,7 +17442,7 @@
         },
         {
           "name": "sea_colors",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/sea_colors.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -17489,7 +17489,7 @@
         },
         {
           "name": "weather_dynamics",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/weather_dynamics.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -17673,7 +17673,7 @@
         },
         {
           "name": "weather_tile_management",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/weather_tile_management.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -18122,7 +18122,7 @@
         },
         {
           "name": "weather_tiles",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\local_weather",
+          "path": "Nasal\\local_weather",
           "rel_path": "Nasal/local_weather/weather_tiles.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -19324,7 +19324,7 @@
     },
     {
       "name": "local_weather_auto_init",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/local_weather_auto_init.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -19345,7 +19345,7 @@
     },
     {
       "name": "markerpins",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/markerpins.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -19393,7 +19393,7 @@
     },
     {
       "name": "material",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/material.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -19437,7 +19437,7 @@
     },
     {
       "name": "math",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/math.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -19529,7 +19529,7 @@
     },
     {
       "name": "modules",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/modules/",
       "is_module": true,
       "icon": "&#128193;",
@@ -19537,7 +19537,7 @@
       "children": [
         {
           "name": "canvas_efis",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules",
+          "path": "Nasal\\modules",
           "rel_path": "Nasal/modules/canvas_efis/",
           "is_module": true,
           "icon": "&#128193;",
@@ -19545,7 +19545,7 @@
           "children": [
             {
               "name": "display-unit",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules\\canvas_efis",
+              "path": "Nasal\\modules\\canvas_efis",
               "rel_path": "Nasal/modules/canvas_efis/display-unit.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -19554,7 +19554,7 @@
             },
             {
               "name": "efis-canvas",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules\\canvas_efis",
+              "path": "Nasal\\modules\\canvas_efis",
               "rel_path": "Nasal/modules/canvas_efis/efis-canvas.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -19663,7 +19663,7 @@
             },
             {
               "name": "efis-framework",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules\\canvas_efis",
+              "path": "Nasal\\modules\\canvas_efis",
               "rel_path": "Nasal/modules/canvas_efis/efis-framework.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -19672,7 +19672,7 @@
             },
             {
               "name": "efis",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules\\canvas_efis",
+              "path": "Nasal\\modules\\canvas_efis",
               "rel_path": "Nasal/modules/canvas_efis/efis.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -19882,7 +19882,7 @@
             },
             {
               "name": "eicas-message-sys",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules\\canvas_efis",
+              "path": "Nasal\\modules\\canvas_efis",
               "rel_path": "Nasal/modules/canvas_efis/eicas-message-sys.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -20274,7 +20274,7 @@
             },
             {
               "name": "main",
-              "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules\\canvas_efis",
+              "path": "Nasal\\modules\\canvas_efis",
               "rel_path": "Nasal/modules/canvas_efis/main.nas",
               "is_module": false,
               "icon": "&#128196;",
@@ -20302,7 +20302,7 @@
         },
         {
           "name": "dummy",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules",
+          "path": "Nasal\\modules",
           "rel_path": "Nasal/modules/dummy.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -20311,7 +20311,7 @@
         },
         {
           "name": "repair_config",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\modules",
+          "path": "Nasal\\modules",
           "rel_path": "Nasal/modules/repair_config.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -20364,7 +20364,7 @@
     },
     {
       "name": "modules",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/modules.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -20588,7 +20588,7 @@
     },
     {
       "name": "mp_broadcast",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/mp_broadcast.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -20973,7 +20973,7 @@
     },
     {
       "name": "multikey",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/multikey.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -21053,7 +21053,7 @@
     },
     {
       "name": "multiplayer",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/multiplayer.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -21304,7 +21304,7 @@
     },
     {
       "name": "notifications",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/notifications.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -21313,7 +21313,7 @@
     },
     {
       "name": "orbital_target",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/orbital_target.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -21443,7 +21443,7 @@
     },
     {
       "name": "performance_monitor",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/performance_monitor/",
       "is_module": true,
       "icon": "&#128193;",
@@ -21451,7 +21451,7 @@
       "children": [
         {
           "name": "monitor",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\performance_monitor",
+          "path": "Nasal\\performance_monitor",
           "rel_path": "Nasal/performance_monitor/monitor.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -21522,7 +21522,7 @@
     },
     {
       "name": "prop_key_handler",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/prop_key_handler.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -21623,7 +21623,7 @@
     },
     {
       "name": "props",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/props.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22326,7 +22326,7 @@
     },
     {
       "name": "redout",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/redout.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22342,7 +22342,7 @@
     },
     {
       "name": "route_manager",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/route_manager.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22508,7 +22508,7 @@
     },
     {
       "name": "scenery",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/scenery.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22574,7 +22574,7 @@
     },
     {
       "name": "screen",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/screen.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22847,7 +22847,7 @@
     },
     {
       "name": "screenshot",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/screenshot.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22908,7 +22908,7 @@
     },
     {
       "name": "seaport",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/seaport.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -22917,7 +22917,7 @@
     },
     {
       "name": "std",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/std/",
       "is_module": true,
       "icon": "&#128193;",
@@ -22925,7 +22925,7 @@
       "children": [
         {
           "name": "algorithm",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\std",
+          "path": "Nasal\\std",
           "rel_path": "Nasal/std/algorithm.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -22974,7 +22974,7 @@
         },
         {
           "name": "hash",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\std",
+          "path": "Nasal\\std",
           "rel_path": "Nasal/std/hash.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -22983,7 +22983,7 @@
         },
         {
           "name": "string",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\std",
+          "path": "Nasal\\std",
           "rel_path": "Nasal/std/string.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -23113,7 +23113,7 @@
         },
         {
           "name": "Vector",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\std",
+          "path": "Nasal\\std",
           "rel_path": "Nasal/std/Vector.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -23232,7 +23232,7 @@
     },
     {
       "name": "std",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/std.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -23260,7 +23260,7 @@
     },
     {
       "name": "string",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/string.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -23594,7 +23594,7 @@
     },
     {
       "name": "tanker",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/tanker.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -23756,7 +23756,7 @@
     },
     {
       "name": "towing",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/towing/",
       "is_module": true,
       "icon": "&#128193;",
@@ -23764,7 +23764,7 @@
       "children": [
         {
           "name": "hitch",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\towing",
+          "path": "Nasal\\towing",
           "rel_path": "Nasal/towing/hitch.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -24065,7 +24065,7 @@
     },
     {
       "name": "track_target",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/track_target.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -24094,7 +24094,7 @@
     },
     {
       "name": "tutorial",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/tutorial/",
       "is_module": true,
       "icon": "&#128193;",
@@ -24102,7 +24102,7 @@
       "children": [
         {
           "name": "tutorial",
-          "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal\\tutorial",
+          "path": "Nasal\\tutorial",
           "rel_path": "Nasal/tutorial/tutorial.nas",
           "is_module": false,
           "icon": "&#128196;",
@@ -24296,7 +24296,7 @@
     },
     {
       "name": "video",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/video.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -24314,7 +24314,7 @@
     },
     {
       "name": "view",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/view.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -24914,7 +24914,7 @@
     },
     {
       "name": "volcano",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/volcano.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -25025,7 +25025,7 @@
     },
     {
       "name": "weather_scenario",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/weather_scenario.nas",
       "is_module": false,
       "icon": "&#128196;",
@@ -25041,7 +25041,7 @@
     },
     {
       "name": "windsock",
-      "path": "E:\\FlightGear\\FlightGear 2024.1\\data\\Nasal",
+      "path": "Nasal",
       "rel_path": "Nasal/windsock.nas",
       "is_module": false,
       "icon": "&#128196;",
