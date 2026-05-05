@@ -57,6 +57,18 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help=f"Output folder (default: {DEFAULT_OUTPUT_PATH}).",
         default=str(DEFAULT_OUTPUT_PATH),
     )
+    parser.add_argument(
+        "--html",
+        action="store_true",
+        dest="html",
+        help="Will output a generated html file.",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        dest="json",
+        help="Will output a generated json file.",
+    )
 
     args = parser.parse_args(argv)
     return args
@@ -69,6 +81,10 @@ def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv or sys.argv[1:])
     fg_root_dir = Path(args.f)
     output_dir = Path(args.o)
+    should_output_all = not any([
+        args.html,
+        args.json,
+    ])
 
     try:
         nasal_api = NasalAPI(fg_root_dir, output_dir)
@@ -76,11 +92,13 @@ def main(argv: list[str] | None = None) -> int:
         fg_version = nasal_api.get_fg_version()
         logger.info("Found FlightGear version %s", fg_version)
 
-        html_file = nasal_api.generate_html()
-        logger.info("Generated HTML at %s", html_file)
+        if should_output_all is True or args.html:
+            html_file = nasal_api.generate_html()
+            logger.info("Generated HTML at %s", html_file)
 
-        json_file = nasal_api.generate_json_tree()
-        logger.info("Generated JSON tree at %s", json_file)
+        if should_output_all is True or args.json:
+            json_file = nasal_api.generate_json_tree()
+            logger.info("Generated JSON tree at %s", json_file)
 
     except FileNotFoundError as e:
         logger.error("Missing file or directory: %s", e)
