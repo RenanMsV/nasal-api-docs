@@ -40,7 +40,6 @@
                 <a class="main_module_link" href="#{{ namespace.id }}">{{ namespace.icon | safe }} {{ namespace.name }}</a>
                 <br/>
             </div>
-            {# Recursive call for submodules inside this namespace’s items #}
             {% for child in namespace.children %}
                 {{ render_namespace_links([child], level + 1) }}
             {% endfor %}
@@ -63,8 +62,26 @@
 {% endfor %}
 {% endmacro %}
 
-{% macro render_namespace(namespace, level=0) %}
+{% macro render_class(cls, namespace_name) %}
+<div class="class_container">
+    <h4 class="class_definition">
+        <b>{{ namespace_name }}</b>.<b><i><u>{{ cls.name }}</u></i></b>
+    </h4>
+    {{ render_comments(cls.comments) }}
 
+    {% for function in cls.functions %}
+    <div>
+        <h4 class="function">
+            <b>{{ namespace_name }}.{{ cls.name }}.{{ function.name }}</b> ( {{ render_args(function.args) }} )
+        </h4>
+        {{ render_comments(function.comments) }}
+    </div>
+    {% endfor %}
+    {# NOTE: cls.classes is unused for now. extend here if parser supports deeper nesting #}
+</div>
+{% endmacro %}
+
+{% macro render_namespace(namespace, level=0) %}
 <div class="container" style="{% if level > 0 %}margin-left: {{ level * 15 }}px;{% endif %}">
     <h2 class="namespace_title">
         <a name="{{ namespace.id }}">{{ namespace.icon | safe }} {{ namespace.name }}</a>
@@ -72,25 +89,20 @@
     </h2>
 
     {% for function in namespace.functions %}
-    {% if function.type == 'class_definition' %}
-    <div>
-        <h4 class="class_definition">
-            <b>{{ namespace.name }}</b>.<b><i><u>{{ function.name }}</u></i></b>
-        </h4>
-        {{render_comments(function.comments)}}
-    </div>
-
-    {% elif function.type == 'function' %}
     <div>
         <h4 class="function">
             <b>{{ namespace.name }}</b>.<b>{{ function.name }}</b> ( {{ render_args(function.args) }} )
         </h4>
         {{ render_comments(function.comments) }}
     </div>
-    {% endif %}
     {% endfor %}
+
+    {% for cls in namespace.classes %}
+        {{ render_class(cls, namespace.name) }}
+    {% endfor %}
+
     {% for child in namespace.children %}
-    {{ render_namespace(child, level + 1) }}
+        {{ render_namespace(child, level + 1) }}
     {% endfor %}
 </div>
 {% endmacro %}

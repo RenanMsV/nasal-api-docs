@@ -30,11 +30,45 @@ from dataclasses import dataclass, field
 
 
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 from .parser import NasalParser
 from .logger import get_logger
 logger = get_logger()
+
+
+@dataclass
+class NasalClass:
+    """Represents a Nasal class."""
+    name: str
+    comments: List[str]
+    classes: list["NasalClass"] = field(default_factory=lambda: [])  # classes
+    functions: list["NasalFunction"] = field(default_factory=lambda: [])  # functions
+    type: str = "class_definition"
+
+    def __post_init__(self):
+        self.name = self.name.rstrip(".")
+
+    def to_dict(self) -> Dict[str, Any]:
+        """
+        Converts this object to a dictionary suitable for JSON.
+
+        Returns:
+            dict: The object as a dict.
+        """
+        return {
+            "type": self.type,
+            "name": self.name,
+            "comments": self.comments,
+            "classes": [
+                f.to_dict()
+                for f in self.classes
+            ],
+            "functions": [
+                f.to_dict()
+                for f in self.functions
+            ],
+        }
 
 
 @dataclass
@@ -43,10 +77,9 @@ class NasalFunction:
     name: str
     args: List[str]
     comments: List[str]
-    type: str = ""      # computed in __post_init__
+    type: str = "function"
 
     def __post_init__(self):
-        self.type = "class_definition" if self.name.endswith(".") else "function"
         self.name = self.name.rstrip(".")
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +105,12 @@ class NasalItem:
     root_path: Path
     is_module: bool = False
     children: list["NasalItem"] = field(default_factory=lambda: [])  # submodules
+    classes: list["NasalClass"] = field(default_factory=lambda: [])  # classes
     functions: list["NasalFunction"] = field(default_factory=lambda: [])  # files
+    type: str = "file_or_module"
     icon: str = ""          # computed in __post_init__
     rel_path: str = ""      # computed in __post_init__
     id: str = ""            # computed in __post_init__
-    type: str = ""          # computed in __post_init__
 
     def __post_init__(self):
         self.icon = "&#128193;" if self.is_module else "&#128196;"  # 📁, 📄
@@ -104,6 +138,11 @@ class NasalItem:
             "rel_path": self.rel_path,
             "is_module": self.is_module,
             "icon": self.icon,
+            "type": self.type,
+            "classes": [
+                f.to_dict()
+                for f in self.classes
+            ],
             "functions": [
                 f.to_dict()
                 for f in self.functions
@@ -137,6 +176,50 @@ class NasalFileSystem:
             self.fg_version = f.read(256).rstrip("\n")
             return self.fg_version
 
+    def _build_items(
+            self,
+            parsed: List[Tuple[str, str, List[str]]]
+    ) -> Tuple[List[NasalClass], List[NasalFunction]]:
+        """
+        Takes a flat list of tuples from parser.parse_file() and returns
+        (classes, functions) with functions nested inside their classes.
+
+        **NOTE**: Only one level of class nesting is supported (e.g. "Class.myMethod").
+        If the parser is extended to emit deeper paths (e.g. "Outer.Inner.method"),
+        this method should be refactored to recursively build the class tree.
+        """
+        classes: dict[str, NasalClass] = {}
+        functions: list[NasalFunction] = []
+
+        for f in parsed:
+            name: str = f[0]
+            args: list[str] = [a.strip() for a in f[1].split(',') if a.strip()]
+            comments = f[2]
+
+            if name.endswith("."):
+                # It's a class definition — e.g. "MyClass."
+                class_name = name.rstrip(".")
+                if class_name not in classes:
+                    classes[class_name] = NasalClass(name=name, comments=comments)
+            else:
+                # Could be "myFunc" or "MyClass.myMethod"
+                if "." in name:
+                    # Belongs to a class
+                    class_name, method_name = name.rsplit(".", 1)
+                    if class_name not in classes:
+                        # Class wasn't explicitly declared, create it implicitly
+                        classes[class_name] = NasalClass(name=class_name, comments=[])
+                    classes[class_name].functions.append(
+                        NasalFunction(name=method_name, args=args, comments=comments)
+                    )
+                else:
+                    # Top-level function
+                    functions.append(
+                        NasalFunction(name=name, args=args, comments=comments)
+                    )
+
+        return list(classes.values()), functions
+
     def _get_nasal_tree(self) -> List[NasalItem]:
         """
         Scan the nasal_dir recursively and return a list of NasalItems (files/modules).
@@ -154,15 +237,10 @@ class NasalFileSystem:
                         path=path,
                         root_path=self.nasal_dir
                     )
-                    # Convert tuples from parse_file() to NasalFunction objects
-                    file_item.functions = [
-                        NasalFunction(
-                            name=f[0],
-                            args=[a.strip() for a in f[1].split(',') if a.strip()],
-                            comments=f[2]
-                        )
-                        for f in self._parser.parse_file(entry)
-                    ]
+                    # Convert tuples from parse_file() to classes and function objects
+                    file_item.classes, file_item.functions = self._build_items(
+                        self._parser.parse_file(entry)
+                    )
                     items.append(file_item)
                 elif entry.is_dir():
                     module_item = NasalItem(
