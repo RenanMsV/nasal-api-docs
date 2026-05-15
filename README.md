@@ -32,7 +32,7 @@ Auto generates Nasal API documentation from FlightGear's nasal scripts.
 
 ### Requirements
 
-- Requires **Python 3.7** or newer.
+- Requires **Python 3.10** or newer.
 
 - Uses [Jinja2](https://pypi.org/project/Jinja2/) module to generate the HTML.
 To install Jinja2 run the console command below:
@@ -47,12 +47,12 @@ To install Jinja2 run the console command below:
 🧩 This project is published at <https://pypi.org/project/nasal-api-docs>
 
 Install it with:
-```bash
+```sh
 pip install nasal-api-docs
 ```
 
 Run the command:
-```bash
+```sh
 nasal-api-docs -f /path/to/FlightGear/data -o /path/to/output/
 ```
 
