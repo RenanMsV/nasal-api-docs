@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Nasal API - 2024.1.1</title>
+    <title>Nasal API - 2024.1.7</title>
     <link rel="icon" type="image/x-icon" href="https://wiki.flightgear.org/w/images/6/68/Nasal_logo_single_letter.png">
     <style>
 :root {
@@ -139,9 +139,9 @@ body {
     <h1 class="page_title">
         Nasal $FGROOT Library<br/>
         <span>
-            FlightGear version: 2024.1.1 .<br/>
-            This file was generated automatically by nasal-api-docs at 04-16-2026 12-34-38AM .<br/>
-            nasal-api-docs v1.0.0 | Parser v1.0.0 | Python v3.13.9 .
+            FlightGear version: 2024.1.7 .<br/>
+            This file was generated automatically by nasal-api-docs at 08-29-2026 03-51-26PM .<br/>
+            nasal-api-docs v0.2.0 | Parser v1.0.0 | Python v3.13.15 .
         </span>
     </h1>
     <button class="info_links">
@@ -4547,6 +4547,12 @@ body {
     <div>
         <h4 class="function">
             <b>ErrorNotification</b>.<b>showErrorNotification</b> ( <span class="arg">node</span> )
+        </h4>
+        
+    </div>
+    <div>
+        <h4 class="function">
+            <b>ErrorNotification</b>.<b>showErrorMessage</b> ( <span class="arg">node</span> )
         </h4>
         
     </div>
@@ -12159,6 +12165,12 @@ body {
     </div>
     <div>
         <h4 class="function">
+            <b>gui</b>.<b>FileSelector.set_location</b> ( <span class="arg">loc</span> )
+        </h4>
+        
+    </div>
+    <div>
+        <h4 class="function">
             <b>gui</b>.<b>FileSelector.open</b> (  )
         </h4>
         
@@ -17074,6 +17086,14 @@ body {
     </div>
     <div>
         <h4 class="function">
+            <b>modules</b>.<b>Module._redirect_removelistener</b> (  )
+        </h4>
+                <div class="comments">if the user manually removes a listener, update our list to avoid</div><br/>
+        <div class="comments">double-removes</div><br/>
+
+    </div>
+    <div>
+        <h4 class="function">
             <b>modules</b>.<b>Module._redirect_maketimer</b> (  )
         </h4>
                 <div class="comments">redirect maketimer for module</div><br/>
@@ -19728,7 +19748,7 @@ body {
     </div>
     <div>
         <h4 class="function">
-            <b>hitch</b>.<b>load_prop</b> ( <span class="arg">property</span>, <span class="arg">cnfg_p</span> )
+            <b>hitch</b>.<b>new_config_property</b> ( <span class="arg">path</span>, <span class="arg">value</span>, <span class="arg">type</span>, <span class="arg">cfg_p</span> )
         </h4>
         
     </div>
@@ -19836,6 +19856,12 @@ body {
         <div class="comments">create towrope</div><br/>
         <div class="comments">######################################################################################################################</div><br/>
 
+    </div>
+    <div>
+        <h4 class="function">
+            <b>hitch</b>.<b>recreateNodes</b> ( <span class="arg">hash</span>, <span class="arg">device</span> )
+        </h4>
+        
     </div>
     <div>
         <h4 class="function">
