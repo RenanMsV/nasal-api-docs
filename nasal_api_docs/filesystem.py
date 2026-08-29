@@ -33,6 +33,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from .parser import NasalParser
+from .type_inference import infer_return_type
 from .logger import get_logger
 logger = get_logger()
 
@@ -44,10 +45,12 @@ class NasalFunction:
     args: List[str]
     comments: List[str]
     type: str = ""      # computed in __post_init__
+    return_type: str = ""  # computed in __post_init__
 
     def __post_init__(self):
         self.type = "class_definition" if self.name.endswith(".") else "function"
         self.name = self.name.rstrip(".")
+        self.return_type = infer_return_type(self.comments)
 
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -61,6 +64,7 @@ class NasalFunction:
             "name": self.name,
             "args": self.args,
             "comments": self.comments,
+            "return_type": self.return_type,
         }
 
 

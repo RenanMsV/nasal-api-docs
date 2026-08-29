@@ -51,6 +51,12 @@
         </h2>
     </div>
 
+{% macro render_return_type(return_type) %}
+{% if return_type and return_type != 'unknown' %}
+<span class="return-type">{{ return_type }}</span>
+{% endif %}
+{% endmacro %}
+
 {% macro render_args(args) %}
 {% for arg in args %}
 <span class="arg">{{ arg.strip() }}</span>{% if not loop.last %}, {% endif %}
@@ -83,7 +89,7 @@
     {% elif function.type == 'function' %}
     <div>
         <h4 class="function">
-            <b>{{ namespace.name }}</b>.<b>{{ function.name }}</b> ( {{ render_args(function.args) }} )
+            <b>{{ namespace.name }}</b>.<b>{{ function.name }}</b> ( {{ render_args(function.args) }} ) {{ render_return_type(function.return_type) }}
         </h4>
         {{ render_comments(function.comments) }}
     </div>

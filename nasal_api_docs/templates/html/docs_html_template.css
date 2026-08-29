@@ -8,6 +8,7 @@
     --class-definition-lt: #322b2b;
     --function-lt: var(--purple-bold-lt);
     --args-lt: #b11515;
+    --return-type-lt: #1a7a1a;
     --comments-lt: #000;
     --background-lt: var(--white-color-lt);
 
@@ -20,6 +21,7 @@
     --class-definition-dk: #ddd;
     --function-dk: var(--purple-bold-dk);
     --args-dk: #75bbcf;
+    --return-type-dk: #75cf75;
     --comments-dk: var(--white-color-dk);
     --background-dk: var(--white-color-light-dk);
 
@@ -32,6 +34,7 @@
     --class-definition: var(--class-definition-lt);
     --function: var(--purple-bold-lt);
     --args: var(--args-lt);
+    --return-type: var(--return-type-lt);
     --comments: var(--comments-lt);
     --background: var(--background-lt);
 }
@@ -118,6 +121,12 @@ body {
 }
 .function span {
     color: var(--args);
+}
+.return-type {
+    color: var(--return-type);
+    font-style: italic;
+    margin-left: 4px;
+    font-size: 0.9em;
 }
 .comments {
     padding-left:40px;
