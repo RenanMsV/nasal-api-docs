@@ -59,7 +59,8 @@
 
 {% macro render_args(args, arg_types, arg_descriptions) %}
 {% for arg in args %}
-<span class="arg">{{ arg.strip() }}</span>{% if arg_types|length > loop.index0 and arg_types[loop.index0] %}<span class="arg-type">: {{ arg_types[loop.index0] }}</span>{% endif %}{% if arg_descriptions|length > loop.index0 and arg_descriptions[loop.index0] %} <span class="arg-desc">{{ arg_descriptions[loop.index0] }}</span>{% endif %}{% if not loop.last %}, {% endif %}
+{% set aname = arg.split("=")[0].strip() %}
+<span class="arg">{{ arg.strip() }}</span>{% if arg_types is mapping %}{% if aname in arg_types and arg_types[aname] %}<span class="arg-type">: {{ arg_types[aname] }}</span>{% endif %}{% elif arg_types|length > loop.index0 and arg_types[loop.index0] %}<span class="arg-type">: {{ arg_types[loop.index0] }}</span>{% endif %}{% if arg_descriptions is mapping %}{% if aname in arg_descriptions and arg_descriptions[aname] %} <span class="arg-desc">{{ arg_descriptions[aname] }}</span>{% endif %}{% elif arg_descriptions|length > loop.index0 and arg_descriptions[loop.index0] %} <span class="arg-desc">{{ arg_descriptions[loop.index0] }}</span>{% endif %}{% if not loop.last %}, {% endif %}
 {% endfor %}
 {% endmacro %}
 
