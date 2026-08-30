@@ -28,6 +28,8 @@ from nasal_api_docs.type_inference import (
     TYPE_UNKNOWN,
     infer_return_type,
     infer_arg_types,
+    infer_return_type_description,
+    infer_arg_descriptions,
 )
 
 
@@ -436,10 +438,10 @@ def test_arg_types_param_tag_multiple():
 
 
 def test_arg_types_param_tag_no_type():
-    """@param name description without type should yield empty."""
+    """@param name description without type should infer from description."""
     comments = ["@param n The number to calculate"]
     args = ["n"]
-    assert infer_arg_types(comments, args) == [""]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR]
 
 
 def test_arg_types_param_tag_mixed():
@@ -472,3 +474,164 @@ def test_arg_types_args_block_ignores_extra():
     comments = ["Args:", "    n (number) some extra text", "    opts (hash): Options"]
     args = ["n", "opts"]
     assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]
+
+
+# --- Return type description ---
+
+def test_return_desc_at_return_tag():
+    """'@return scalar The Fibonacci number' should extract description."""
+    assert infer_return_type_description(["@return scalar The Fibonacci number at position n"]) == "The Fibonacci number at position n"
+
+
+def test_return_desc_at_return_tag_no_desc():
+    """'@return scalar' without description should yield empty."""
+    assert infer_return_type_description(["@return scalar"]) == ""
+
+
+def test_return_desc_at_return_tag_no_type():
+    """'@return description' without type should still extract description."""
+    assert infer_return_type_description(["@return The new canvas"]) == "The new canvas"
+
+
+def test_return_desc_returns_block():
+    """Returns: type: description should extract description."""
+    assert infer_return_type_description(["Returns:", "    number: The Fibonacci number at position n."]) == "The Fibonacci number at position n."
+
+
+def test_return_desc_returns_block_no_desc():
+    """Returns: type without colon should yield empty description."""
+    assert infer_return_type_description(["Returns:", "    number"]) == ""
+
+
+def test_return_desc_empty_comments():
+    """Empty comments should yield empty description."""
+    assert infer_return_type_description([]) == ""
+
+
+# --- Arg descriptions ---
+
+def test_arg_descs_param_tag():
+    """@param type name description should extract description."""
+    comments = ["@param scalar n The number to calculate"]
+    args = ["n"]
+    assert infer_arg_descriptions(comments, args) == ["The number to calculate"]
+
+
+def test_arg_descs_param_tag_multiple():
+    """Multiple @param type name description entries."""
+    comments = ["@param scalar n The number to calculate", "@param hash opts The options hash"]
+    args = ["n", "opts"]
+    assert infer_arg_descriptions(comments, args) == ["The number to calculate", "The options hash"]
+
+
+def test_arg_descs_args_block():
+    """Args: block with name (type): description should extract description."""
+    comments = ["Args:", "    n (number): The number to calculate", "    opts (hash): The options"]
+    args = ["n", "opts"]
+    assert infer_arg_descriptions(comments, args) == ["The number to calculate", "The options"]
+
+
+def test_arg_descs_args_block_no_desc():
+    """Args: block without colon should yield empty description."""
+    comments = ["Args:", "    n (number)"]
+    args = ["n"]
+    assert infer_arg_descriptions(comments, args) == [""]
+
+
+def test_arg_descs_param_tag_no_type():
+    """@param name description without type should still extract description."""
+    comments = ["@param n The number to calculate"]
+    args = ["n"]
+    assert infer_arg_descriptions(comments, args) == ["The number to calculate"]
+
+
+def test_arg_descs_empty_comments():
+    """Empty comments should yield empty descriptions."""
+    assert infer_arg_descriptions([], ["a", "b"]) == ["", ""]
+
+
+def test_arg_descs_mixed():
+    """Some with descriptions, some without."""
+    comments = ["@param scalar n The number", "@param opts"]
+    args = ["n", "opts"]
+    result = infer_arg_descriptions(comments, args)
+    assert result[0] == "The number"
+    assert result[1] == ""
+
+
+# --- NasalFunction to_dict with descriptions ---
+
+def test_to_dict_includes_descriptions():
+    """NasalFunction.to_dict() should include return_type_description and filtered dicts."""
+    from nasal_api_docs.filesystem import NasalFunction
+
+    func = NasalFunction(
+        name="makeNode",
+        args=["n", "anotherArgument"],
+        comments=["@param scalar n The number to calculate", "@return node The resulting node"],
+    )
+    d = func.to_dict()
+    assert "return_type_description" in d
+    assert d["return_type_description"] == "The resulting node"
+    assert "arg_descriptions" in d
+    # Empty string is filtered out — now dict keyed by arg name
+    assert d["arg_descriptions"] == {"n": "The number to calculate"}
+    # Also check that empty arg type for second arg is filtered
+    assert d.get("arg_types") == {"n": "scalar"}
+
+
+def test_to_dict_no_descriptions():
+    """NasalFunction.to_dict() should omit empty descriptions."""
+    from nasal_api_docs.filesystem import NasalFunction
+
+    func = NasalFunction(
+        name="simple",
+        args=["a", "b"],
+        comments=["just a comment"],
+    )
+    d = func.to_dict()
+    assert "return_type_description" not in d
+    assert "arg_descriptions" not in d
+    assert "arg_types" not in d
+
+
+# --- Real FGROOT patterns (untyped @param / @return) ---
+
+def test_arg_types_param_string_prefix():
+    """FGROOT: @param s String ... should infer scalar from description prefix."""
+    comments = ["@param s    String to compare to"]
+    args = ["s"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR]
+
+
+def test_arg_types_param_vector_bracket():
+    """FGROOT: @param size ([width, height]) should infer vector."""
+    comments = ["@param size ([width, height])"]
+    args = ["size"]
+    assert infer_arg_types(comments, args) == [TYPE_VECTOR]
+
+
+def test_arg_types_param_vector_bracket_angle():
+    """FGROOT: @param geom [<x>, ...] should infer vector."""
+    comments = ["@param geom [<x>, <y>, <width>, <height>]"]
+    args = ["geom"]
+    assert infer_arg_types(comments, args) == [TYPE_VECTOR]
+
+
+def test_arg_types_param_hash_optional():
+    """FGROOT: @param options Optional hash ... should infer hash."""
+    comments = ["@param options  Optional hash of options"]
+    args = ["options"]
+    assert infer_arg_types(comments, args) == [TYPE_HASH]
+
+
+def test_arg_descs_untyped_multi():
+    """FGROOT: multiple @param without types should extract descriptions."""
+    comments = ["@param begin  index of first package", "@param end    index after last package"]
+    args = ["begin", "end"]
+    assert infer_arg_descriptions(comments, args) == ["index of first package", "index after last package"]
+
+
+def test_return_desc_untyped():
+    """FGROOT: @return The new canvas should extract description even without type."""
+    assert infer_return_type_description(["@return The new canvas"]) == "The new canvas"

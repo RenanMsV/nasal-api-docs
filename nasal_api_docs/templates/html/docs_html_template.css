@@ -128,11 +128,21 @@ body {
     margin-left: 4px;
     font-size: 0.9em;
 }
+.return-type-desc {
+    color: var(--return-type);
+    font-size: 0.8em;
+    opacity: 0.75;
+}
 .arg-type {
     color: var(--args);
     font-style: italic;
     margin-left: 4px;
     font-size: 0.85em;
+}
+.arg-desc {
+    color: var(--args);
+    font-size: 0.8em;
+    opacity: 0.75;
 }
 .comments {
     padding-left:40px;

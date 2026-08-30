@@ -237,6 +237,132 @@ def _check_returns_block(text: str) -> Optional[str]:
     return None
 
 
+def infer_return_type_description(comments: List[str]) -> str:
+    """Extract the return type description from comment patterns.
+
+    Supports:
+    - '@return type description' — description is everything after the type word
+    - '@return description' — untyped, whole text after @return
+    - 'Returns: type: description' — description is everything after 'type:'
+
+    Args:
+        comments: List of cleaned comment strings (without leading `#`).
+
+    Returns:
+        The description string, or empty string if none found.
+    """
+    if not comments:
+        return ""
+
+    combined = " ".join(comments)
+
+    # Pattern 1: @return type description — type must be a known keyword
+    m = re.search(r"@return\s+(\w+)\s+(.*?)(?=\s*@|\breturns:\s*\w|$)", combined, re.DOTALL | re.IGNORECASE)
+    if m:
+        type_word = m.group(1).lower()
+        if _TYPE_KEYWORDS.get(type_word):
+            return m.group(2).strip()
+
+    # Pattern 1b: @return description — untyped fallback
+    m = re.search(r"@return\s+(.*?)(?=\s*@|\breturns:\s*\w|$)", combined, re.DOTALL | re.IGNORECASE)
+    if m:
+        desc = m.group(1).strip()
+        if desc and desc.lower() not in _TYPE_KEYWORDS:
+            return desc
+
+    # Pattern 2: Returns: type: description
+    m = re.search(r"returns:\s*\w+\s*:\s*(.*)", combined, re.IGNORECASE)
+    if m:
+        return m.group(1).strip()
+
+    return ""
+
+
+def infer_arg_descriptions(comments: List[str], args: List[str]) -> List[str]:
+    """Extract parameter descriptions from comment patterns.
+
+    Supports:
+    - '@param type name description' — description is everything after the name
+    - 'Args:' block 'name (type): description' — description is everything after ') :'
+
+    Args:
+        comments: List of cleaned comment strings.
+        args: List of raw argument strings from the parser.
+
+    Returns:
+        List of description strings parallel to ``args``.  Unknown parameters
+        receive an empty string.
+    """
+    if not comments or not args:
+        return [""] * len(args)
+
+    combined = " ".join(comments)
+    arg_names = [a.split("=")[0].strip() for a in args]
+    descriptions: List[str] = [""] * len(args)
+
+    # Strategy 1: @param type name description
+    _merge_descriptions(descriptions, _infer_from_param_tag_descriptions(combined, arg_names))
+    if all(d for d in descriptions):
+        return descriptions
+
+    # Strategy 2: Args: block name (type): description
+    _merge_descriptions(descriptions, _infer_from_args_block_descriptions(combined, arg_names))
+
+    return descriptions
+
+
+def _merge_descriptions(target: List[str], source: List[str]) -> None:
+    """Fill empty slots in target from source."""
+    for i in range(min(len(target), len(source))):
+        if not target[i] and source[i]:
+            target[i] = source[i]
+
+
+def _infer_from_param_tag_descriptions(text: str, arg_names: List[str]) -> List[str]:
+    """Extract descriptions from '@param' tag patterns.
+
+    Handles both:
+    - '@param type name description' (typed)
+    - '@param name description' (untyped, most common in FGROOT)
+    """
+    descriptions: List[str] = [""] * len(arg_names)
+    parts = re.split(r'\s*@param\s+', ' ' + text)
+    for part in parts[1:]:
+        part = part.strip()
+        if not part:
+            continue
+        # Try typed pattern first: type name description
+        m = re.match(r"(\w+)\s+(\w+)\s+(.*?)(?=\s*@|\Z)", part, re.DOTALL)
+        if m:
+            type_word, name, desc = m.group(1), m.group(2), m.group(3).strip()
+            if type_word.lower() in _TYPE_KEYWORDS and name in arg_names:
+                idx = arg_names.index(name)
+                if desc:
+                    descriptions[idx] = desc
+                continue
+        # Fallback: name description (or name only)
+        m = re.match(r"(\w+)\s*(.*?)(?=\s*@|\Z)", part, re.DOTALL)
+        if m:
+            name, desc = m.group(1), m.group(2).strip()
+            if name in arg_names:
+                idx = arg_names.index(name)
+                # Don't overwrite already-filled typed entry and don't add empty
+                if not descriptions[idx] and desc:
+                    descriptions[idx] = desc
+    return descriptions
+
+
+def _infer_from_args_block_descriptions(text: str, arg_names: List[str]) -> List[str]:
+    """Extract descriptions from 'Args:' block 'name (type): description' format."""
+    descriptions: List[str] = [""] * len(arg_names)
+    for m in re.finditer(r"(\w+)\s*\(\w+\)\s*:\s*(.*?)(?=\s*\w+\s*\(|$)", text, re.DOTALL):
+        name, desc = m.group(1), m.group(2).strip()
+        if name in arg_names:
+            idx = arg_names.index(name)
+            descriptions[idx] = desc
+    return descriptions
+
+
 def _scan_for_type_keywords(text: str) -> str:
     """Scan comment text for known type keywords as fallback."""
     # Check for specific type keywords — use word boundaries to avoid
@@ -324,14 +450,66 @@ def _merge_types(target: List[str], source: List[str]) -> None:
 
 
 def _infer_from_param_tags(text: str, arg_names: List[str]) -> List[str]:
-    """Extract types from '@param type name' format (addon framework / wiki)."""
+    """Extract types from '@param' tag patterns.
+
+    Handles:
+    - '@param type name' (typed)
+    - '@param name description' where description starts with a type word
+      e.g. 'String to compare', 'Vector of 3 values'
+    - '@param name ([...])' or '@param name [<...>]' → vector
+    """
     types: List[str] = [""] * len(arg_names)
+
+    # Strategy 1: typed pattern @param type name
     matches = re.findall(r"@param\s+(\w+)\s+(\w+)", text)
     for type_word, name in matches:
         mapped = _TYPE_KEYWORDS.get(type_word.lower())
         if mapped and name in arg_names:
             idx = arg_names.index(name)
             types[idx] = mapped
+
+    # Strategy 2: infer from description prefix for remaining untyped params
+    parts = re.split(r'\s*@param\s+', ' ' + text)
+    for part in parts[1:]:
+        part = part.strip()
+        if not part:
+            continue
+        # Check if this part was already handled as typed
+        m_typed = re.match(r"(\w+)\s+(\w+)\s+", part)
+        if m_typed:
+            type_word, name = m_typed.group(1), m_typed.group(2)
+            if type_word.lower() in _TYPE_KEYWORDS and name in arg_names:
+                continue  # already handled
+        # Untyped: name + description
+        m = re.match(r"(\w+)\s*(.*)", part, re.DOTALL)
+        if not m:
+            continue
+        name, desc = m.group(1), m.group(2).strip()
+        if name not in arg_names:
+            continue
+        idx = arg_names.index(name)
+        if types[idx]:
+            continue
+        # Bracket/paren vector hint like ([width, height]) or [<x>, <y>]
+        if desc.strip().startswith(("(", "[")):
+            types[idx] = TYPE_VECTOR
+            continue
+        desc_stripped = desc.lstrip(" ([{<")
+        # First word of description as type hint
+        first_word_m = re.match(r"([A-Za-z]+)", desc_stripped)
+        if first_word_m:
+            first_word = first_word_m.group(1).lower()
+            # Direct keyword match
+            mapped = _TYPE_KEYWORDS.get(first_word)
+            if mapped:
+                types[idx] = mapped
+                continue
+            # Fallback: scan description for any type keyword
+            # e.g. "Optional hash of options" → hash
+            mapped = _extract_type_from_description(desc)
+            if mapped != TYPE_UNKNOWN:
+                types[idx] = mapped
+
     return types
 
 
@@ -367,8 +545,7 @@ def _infer_from_inline_signature(text: str, arg_names: List[str]) -> List[str]:
                 mapped = _TYPE_KEYWORDS.get(raw.lower())
                 if mapped:
                     types[idx + i] = mapped
-                else:
-                    types[idx + i] = raw.lower()
+                # Unknown raw types (e.g. "[width") are ignored to avoid polluting
         if all(t for t in types):
             break
 
@@ -378,6 +555,9 @@ def _infer_from_inline_signature(text: str, arg_names: List[str]) -> List[str]:
 def _infer_from_synopsis(text: str, arg_names: List[str]) -> List[str]:
     """Extract types from SYNOPSIS angle-bracket patterns like '<type>'."""
     types: List[str] = [""] * len(arg_names)
+
+    if "synopsis" not in text.lower():
+        return types
 
     # Find all <type> patterns in order
     bracket_types = re.findall(r"<(\w+)>", text)

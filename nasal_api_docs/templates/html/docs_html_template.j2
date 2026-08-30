@@ -51,15 +51,15 @@
         </h2>
     </div>
 
-{% macro render_return_type(return_type) %}
+{% macro render_return_type(return_type, return_type_description) %}
 {% if return_type and return_type != 'unknown' %}
-<span class="return-type">{{ return_type }}</span>
+<span class="return-type">-> {{ return_type }}</span>{% if return_type_description %} <span class="return-type-desc">{{ return_type_description }}</span>{% endif %}
 {% endif %}
 {% endmacro %}
 
-{% macro render_args(args, arg_types) %}
+{% macro render_args(args, arg_types, arg_descriptions) %}
 {% for arg in args %}
-<span class="arg">{{ arg.strip() }}</span>{% if arg_types[loop.index0] %}<span class="arg-type">: {{ arg_types[loop.index0] }}</span>{% endif %}{% if not loop.last %}, {% endif %}
+<span class="arg">{{ arg.strip() }}</span>{% if arg_types|length > loop.index0 and arg_types[loop.index0] %}<span class="arg-type">: {{ arg_types[loop.index0] }}</span>{% endif %}{% if arg_descriptions|length > loop.index0 and arg_descriptions[loop.index0] %} <span class="arg-desc">{{ arg_descriptions[loop.index0] }}</span>{% endif %}{% if not loop.last %}, {% endif %}
 {% endfor %}
 {% endmacro %}
 
@@ -89,7 +89,7 @@
     {% elif function.type == 'function' %}
     <div>
         <h4 class="function">
-            <b>{{ namespace.name }}</b>.<b>{{ function.name }}</b> ( {{ render_args(function.args, function.arg_types) }} ) {{ render_return_type(function.return_type) }}
+            <b>{{ namespace.name }}</b>.<b>{{ function.name }}</b> ( {{ render_args(function.args, function.arg_types, function.arg_descriptions) }} ) {{ render_return_type(function.return_type, function.return_type_description) }}
         </h4>
         {{ render_comments(function.comments) }}
     </div>

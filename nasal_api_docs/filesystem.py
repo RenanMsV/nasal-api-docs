@@ -33,7 +33,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from .parser import NasalParser
-from .type_inference import infer_arg_types, infer_return_type
+from .type_inference import infer_arg_descriptions, infer_arg_types, infer_return_type, infer_return_type_description
 from .logger import get_logger
 logger = get_logger()
 
@@ -46,13 +46,17 @@ class NasalFunction:
     comments: List[str]
     type: str = ""      # computed in __post_init__
     return_type: str = ""  # computed in __post_init__
+    return_type_description: str = ""  # computed in __post_init__
     arg_types: List[str] = field(default_factory=list)  # computed in __post_init__
+    arg_descriptions: List[str] = field(default_factory=list)  # computed in __post_init__
 
     def __post_init__(self):
         self.type = "class_definition" if self.name.endswith(".") else "function"
         self.name = self.name.rstrip(".")
         self.return_type = infer_return_type(self.comments)
+        self.return_type_description = infer_return_type_description(self.comments)
         self.arg_types = infer_arg_types(self.comments, self.args)
+        self.arg_descriptions = infer_arg_descriptions(self.comments, self.args)
 
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -61,14 +65,26 @@ class NasalFunction:
         Returns:
             dict: The object as a dict.
         """
-        return {
+        data: Dict[str, Any] = {
             "type": self.type,
             "name": self.name,
             "args": self.args,
             "comments": self.comments,
             "return_type": self.return_type,
-            "arg_types": self.arg_types,
         }
+        # Only add non-empty optional fields
+        if self.return_type_description:
+            data["return_type_description"] = self.return_type_description
+        # Only add non-empty entries; use dict keyed by arg name to preserve
+        # alignment when some args have no type/desc (avoids compact list losing index).
+        base_args = [a.split("=")[0].strip() for a in self.args]
+        arg_types_dict = {arg: typ for arg, typ in zip(base_args, self.arg_types) if typ}
+        arg_descs_dict = {arg: desc for arg, desc in zip(base_args, self.arg_descriptions) if desc}
+        if arg_types_dict:
+            data["arg_types"] = arg_types_dict
+        if arg_descs_dict:
+            data["arg_descriptions"] = arg_descs_dict
+        return data
 
 
 @dataclass
