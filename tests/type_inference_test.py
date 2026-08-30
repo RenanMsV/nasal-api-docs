@@ -46,7 +46,7 @@ def test_comments_with_no_hints():
     assert infer_return_type(comments) == TYPE_UNKNOWN
 
 
-# --- Void indicators ---
+# Void indicators 
 
 def test_destructor():
     """'class destructor' should infer void."""
@@ -73,7 +73,7 @@ def test_removelistener():
     assert infer_return_type(["removelistener(me.switchL)"]) == TYPE_VOID
 
 
-# --- Scalar ---
+# Scalar 
 
 def test_arrow_return_double():
     """'-> return ... double' should infer scalar."""
@@ -122,7 +122,7 @@ def test_returns_angle():
     assert infer_return_type(["returns angle normalized"]) == TYPE_SCALAR
 
 
-# --- Bool ---
+# Bool 
 
 def test_returns_bool():
     """'returns a bool' should infer bool."""
@@ -159,7 +159,7 @@ def test_returns_whether():
     assert infer_return_type(["returns whether coords are defined"]) == TYPE_BOOL
 
 
-# --- Nil ---
+# Nil 
 
 def test_returns_nil():
     """'returns nil' should infer nil."""
@@ -171,7 +171,7 @@ def test_returns_nothing():
     assert infer_return_type(["returns nothing"]) == TYPE_VOID
 
 
-# --- Vector ---
+# Vector 
 
 def test_returns_vector():
     """'returns a vector' should infer vector."""
@@ -188,7 +188,7 @@ def test_returns_list():
     assert infer_return_type(["returns a list"]) == TYPE_VECTOR
 
 
-# --- Hash ---
+# Hash 
 
 def test_returns_hash():
     """'returns a hash' should infer hash."""
@@ -200,7 +200,7 @@ def test_returns_dictionary():
     assert infer_return_type(["returns a dictionary"]) == TYPE_HASH
 
 
-# --- Func ---
+# Func 
 
 def test_returns_func():
     """'returns a function' should infer func."""
@@ -212,7 +212,7 @@ def test_returns_callback():
     assert infer_return_type(["returns a callback"]) == TYPE_FUNC
 
 
-# --- Node ---
+# Node 
 
 def test_returns_node():
     """'returns a node' should infer node."""
@@ -224,7 +224,7 @@ def test_returns_property_node():
     assert infer_return_type(["returns a property node"]) == TYPE_NODE
 
 
-# --- Arrow return patterns ---
+# Arrow return patterns 
 
 def test_arrow_return_as_scalar():
     """'-> return ... as scalar' should infer scalar."""
@@ -236,7 +236,7 @@ def test_arrow_return_nil():
     assert infer_return_type(["-> return nil"]) == TYPE_NIL
 
 
-# --- Unknown fallback ---
+# Unknown fallback 
 
 def test_generic_comment_unknown():
     """Generic comments without type info should yield unknown."""
@@ -251,7 +251,7 @@ def test_mixed_comments_unknown():
     ]) == TYPE_UNKNOWN
 
 
-# --- Arg type inference ---
+# Arg type inference 
 
 def test_arg_types_empty_comments():
     """No comments should yield empty arg_types."""
@@ -264,15 +264,15 @@ def test_arg_types_empty_args():
 
 
 def test_arg_types_inline_signature():
-    """Inline signature like 'func_name(type)' should infer types."""
-    comments = ["door.enable(bool)"]
-    args = ["enabled"]
+    """Inline signature like 'enable(bool)' should infer types when name matches."""
+    comments = ["enable(bool)"]
+    args = ["enable"]
     assert infer_arg_types(comments, args) == [TYPE_BOOL]
 
 
 def test_arg_types_inline_signature_multiple():
-    """Inline signature with multiple types."""
-    comments = ["func_name(scalar, hash)"]
+    """Inline signature with multiple types when names match."""
+    comments = ["a(scalar), b(hash)"]
     args = ["a", "b"]
     assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]
 
@@ -356,15 +356,119 @@ def test_arg_types_no_matches_empty():
 
 def test_arg_types_all_strategies():
     """When inline signature provides all types, stop there."""
-    comments = ["func(scalar, bool) some other text <hash>"]
+    comments = ["a(scalar), b(bool)"]
     args = ["a", "b"]
     assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_BOOL]
 
 
 def test_arg_types_partial_match():
     """Partial matches should leave remaining as empty string."""
-    comments = ["func(scalar)"]
+    comments = ["a(scalar)"]
     args = ["a", "b"]
     result = infer_arg_types(comments, args)
     assert result[0] == TYPE_SCALAR
     assert result[1] == ""
+
+
+# Return type: @return tag 
+
+def test_return_tag_scalar():
+    """'@return scalar' should infer scalar."""
+    assert infer_return_type(["@return scalar"]) == TYPE_SCALAR
+
+
+def test_return_tag_bool():
+    """'@return bool' should infer bool."""
+    assert infer_return_type(["@return bool"]) == TYPE_BOOL
+
+
+def test_return_tag_node():
+    """'@return node' should infer node."""
+    assert infer_return_type(["@return node"]) == TYPE_NODE
+
+
+def test_return_tag_with_description():
+    """'@return type description' should infer type from tag."""
+    assert infer_return_type(["@return scalar The Fibonacci number"]) == TYPE_SCALAR
+
+
+def test_return_tag_no_type():
+    """'@return description' without type should yield unknown."""
+    assert infer_return_type(["@return The new canvas"]) == TYPE_UNKNOWN
+
+
+# Return type: Returns: block 
+
+def test_returns_block_single_line():
+    """'Returns: number' should infer scalar."""
+    assert infer_return_type(["Returns: number"]) == TYPE_SCALAR
+
+
+def test_returns_block_string():
+    """'Returns: string' should infer scalar."""
+    assert infer_return_type(["Returns: string"]) == TYPE_SCALAR
+
+
+def test_returns_block_multi_line():
+    """Returns: block with type on next line should infer type."""
+    assert infer_return_type(["Returns:", "    number: The Fibonacci number"]) == TYPE_SCALAR
+
+
+def test_returns_block_void():
+    """Returns: void should infer void."""
+    assert infer_return_type(["Returns:", "    void"]) == TYPE_VOID
+
+
+# Arg type: @param tag 
+
+def test_arg_types_param_tag_with_type():
+    """@param type name should infer type."""
+    comments = ["@param scalar n The number to calculate"]
+    args = ["n"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR]
+
+
+def test_arg_types_param_tag_multiple():
+    """Multiple @param type name entries."""
+    comments = ["@param scalar n @param hash opts"]
+    args = ["n", "opts"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]
+
+
+def test_arg_types_param_tag_no_type():
+    """@param name description without type should yield empty."""
+    comments = ["@param n The number to calculate"]
+    args = ["n"]
+    assert infer_arg_types(comments, args) == [""]
+
+
+def test_arg_types_param_tag_mixed():
+    """Some @param with types, some without."""
+    comments = ["@param scalar n @param description"]
+    args = ["n", "description"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_SCALAR
+    assert result[1] == ""
+
+
+# Arg type: Args: block 
+
+def test_arg_types_args_block():
+    """Args: block with (type) format should infer types."""
+    comments = ["Args:", "    n (number): The number to calculate", "    opts (hash): Options"]
+    args = ["n", "opts"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]
+
+
+def test_arg_types_args_block_single():
+    """Args: block with single (type)."""
+    comments = ["Args:", "    n (number)"]
+    args = ["n"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR]
+
+
+def test_arg_types_args_block_ignores_extra():
+    """Args: block with extra unmatched patterns should still fill matched slots."""
+    comments = ["Args:", "    n (number) some extra text", "    opts (hash): Options"]
+    args = ["n", "opts"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]

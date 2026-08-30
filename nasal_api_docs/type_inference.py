@@ -85,6 +85,7 @@ _TYPE_KEYWORDS = {
     # Nil
     "nil": TYPE_NIL,
     "none": TYPE_NIL,
+    "void": TYPE_VOID,
 }
 
 
@@ -117,17 +118,27 @@ def infer_return_type(comments: List[str]) -> str:
     if _is_void(combined):
         return TYPE_VOID
 
-    # 2. Check for arrow patterns
+    # 2. Check for @return tag
+    return_tag_result = _check_return_tag(combined)
+    if return_tag_result:
+        return return_tag_result
+
+    # 3. Check for Returns: block or single-line
+    returns_block_result = _check_returns_block(combined)
+    if returns_block_result:
+        return returns_block_result
+
+    # 4. Check for arrow patterns
     arrow_result = _check_arrow_patterns(combined)
     if arrow_result:
         return arrow_result
 
-    # 3. Check for "returns ..." patterns
-    returns_result = _check_returns_patterns(combined)
-    if returns_result:
-        return returns_result
+    # 5. Check for "returns ..." patterns
+    returns_pattern_result = _check_returns_patterns(combined)
+    if returns_pattern_result:
+        return returns_pattern_result
 
-    # 4. Fallback: scan for type keywords
+    # 6. Fallback: scan for type keywords
     return _scan_for_type_keywords(combined)
 
 
@@ -203,6 +214,29 @@ def _check_returns_patterns(text: str) -> Optional[str]:
     return None
 
 
+def _check_return_tag(text: str) -> Optional[str]:
+    """Check '@return type ...' pattern (addon framework / wiki format)."""
+    m = re.search(r"@return\s+(\w+)", text)
+    if m:
+        keyword = m.group(1).lower()
+        mapped = _TYPE_KEYWORDS.get(keyword)
+        if mapped:
+            return mapped
+    return None
+
+
+def _check_returns_block(text: str) -> Optional[str]:
+    """Check 'Returns: type' single-line and block format (wiki format)."""
+    # Single-line: "returns: string" or "returns: number"
+    m = re.search(r"returns:\s*(\w+)", text)
+    if m:
+        keyword = m.group(1).lower()
+        mapped = _TYPE_KEYWORDS.get(keyword)
+        if mapped:
+            return mapped
+    return None
+
+
 def _scan_for_type_keywords(text: str) -> str:
     """Scan comment text for known type keywords as fallback."""
     # Check for specific type keywords — use word boundaries to avoid
@@ -231,8 +265,10 @@ def infer_arg_types(comments: List[str], args: List[str]) -> List[str]:
     Strategies (applied in order):
     1. Inline signature patterns like ``func_name(type)`` or ``func_name(type1, type2)``
     2. SYNOPSIS angle-bracket patterns like ``<type>``
-    3. Description patterns like ``param_name ... type_description``
-    4. Default-value hints from arg strings (``param = 0`` → scalar)
+    3. @param type name format (addon framework / wiki)
+    4. Args: block with (type) format (wiki)
+    5. Description patterns like ``param_name ... type_description``
+    6. Default-value hints from arg strings (``param = 0`` → scalar)
 
     Args:
         comments: List of cleaned comment strings.
@@ -249,22 +285,32 @@ def infer_arg_types(comments: List[str], args: List[str]) -> List[str]:
     arg_names = [a.split("=")[0].strip() for a in args]
     types: List[str] = [""] * len(args)
 
-    # --- Strategy 1: Inline signature "name(type1, type2, ...)" ---
+    # Strategy 1: Inline signature "name(type1, type2, ...)" 
     _merge_types(types, _infer_from_inline_signature(combined, arg_names))
     if all(t for t in types):
         return types
 
-    # --- Strategy 2: SYNOPSIS angle brackets "<type>" ---
+    # Strategy 2: SYNOPSIS angle brackets "<type>" 
     _merge_types(types, _infer_from_synopsis(combined, arg_names))
     if all(t for t in types):
         return types
 
-    # --- Strategy 3: Description "param_name ... type" ---
+    # Strategy 3: @param type name format 
+    _merge_types(types, _infer_from_param_tags(combined, arg_names))
+    if all(t for t in types):
+        return types
+
+    # Strategy 4: Args: block with (type) format 
+    _merge_types(types, _infer_from_args_block(combined, arg_names))
+    if all(t for t in types):
+        return types
+
+    # Strategy 5: Description "param_name ... type" 
     _merge_types(types, _infer_from_descriptions(combined, arg_names))
     if all(t for t in types):
         return types
 
-    # --- Strategy 4: Default values ---
+    # Strategy 6: Default values 
     _merge_types(types, _infer_from_defaults(args, arg_names))
 
     return types
@@ -277,23 +323,52 @@ def _merge_types(target: List[str], source: List[str]) -> None:
             target[i] = source[i]
 
 
+def _infer_from_param_tags(text: str, arg_names: List[str]) -> List[str]:
+    """Extract types from '@param type name' format (addon framework / wiki)."""
+    types: List[str] = [""] * len(arg_names)
+    matches = re.findall(r"@param\s+(\w+)\s+(\w+)", text)
+    for type_word, name in matches:
+        mapped = _TYPE_KEYWORDS.get(type_word.lower())
+        if mapped and name in arg_names:
+            idx = arg_names.index(name)
+            types[idx] = mapped
+    return types
+
+
+def _infer_from_args_block(text: str, arg_names: List[str]) -> List[str]:
+    """Extract types from 'Args:' block with '(type)' format (wiki)."""
+    types: List[str] = [""] * len(arg_names)
+    matches = re.findall(r"(\w+)\s*\((\w+)\)", text)
+    for name, type_word in matches:
+        if name not in arg_names:
+            continue
+        mapped = _TYPE_KEYWORDS.get(type_word.lower())
+        if mapped:
+            idx = arg_names.index(name)
+            types[idx] = mapped
+    return types
+
+
 def _infer_from_inline_signature(text: str, arg_names: List[str]) -> List[str]:
     """Extract types from patterns like 'door.enable(bool)' or 'func(a, b, c)'."""
     types: List[str] = [""] * len(arg_names)
 
-    # Find all patterns: identifier(type1, type2, ...)
-    matches = re.findall(r"\b\w+(?:\.\w+)?\s*\(\s*([^)]*)\)", text)
-    for match in matches:
-        raw_types = [t.strip() for t in match.split(",") if t.strip()]
+    # Find all patterns: name(type1, type2, ...)
+    matches = re.findall(r"\b(\w+)(?:\.\w+)?\s*\(\s*([^)]*)\)", text)
+    for name, match_str in matches:
+        if name not in arg_names:
+            continue
+        raw_types = [t.strip() for t in match_str.split(",") if t.strip()]
         if not raw_types:
             continue
+        idx = arg_names.index(name)
         for i, raw in enumerate(raw_types):
-            if i < len(arg_names):
+            if idx + i < len(arg_names):
                 mapped = _TYPE_KEYWORDS.get(raw.lower())
                 if mapped:
-                    types[i] = mapped
+                    types[idx + i] = mapped
                 else:
-                    types[i] = raw.lower()
+                    types[idx + i] = raw.lower()
         if all(t for t in types):
             break
 
