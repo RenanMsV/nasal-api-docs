@@ -128,6 +128,12 @@ body {
     margin-left: 4px;
     font-size: 0.9em;
 }
+.arg-type {
+    color: var(--args);
+    font-style: italic;
+    margin-left: 4px;
+    font-size: 0.85em;
+}
 .comments {
     padding-left:40px;
     display:inline;

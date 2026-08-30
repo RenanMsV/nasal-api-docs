@@ -27,6 +27,7 @@ from nasal_api_docs.type_inference import (
     TYPE_VOID,
     TYPE_UNKNOWN,
     infer_return_type,
+    infer_arg_types,
 )
 
 
@@ -248,3 +249,122 @@ def test_mixed_comments_unknown():
         "This is a comment first line",
         "This is a comment third line",
     ]) == TYPE_UNKNOWN
+
+
+# --- Arg type inference ---
+
+def test_arg_types_empty_comments():
+    """No comments should yield empty arg_types."""
+    assert infer_arg_types([], ["a", "b"]) == ["", ""]
+
+
+def test_arg_types_empty_args():
+    """Empty args should yield empty list."""
+    assert infer_arg_types(["some comment"], []) == []
+
+
+def test_arg_types_inline_signature():
+    """Inline signature like 'func_name(type)' should infer types."""
+    comments = ["door.enable(bool)"]
+    args = ["enabled"]
+    assert infer_arg_types(comments, args) == [TYPE_BOOL]
+
+
+def test_arg_types_inline_signature_multiple():
+    """Inline signature with multiple types."""
+    comments = ["func_name(scalar, hash)"]
+    args = ["a", "b"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]
+
+
+def test_arg_types_synopsis_angle_brackets():
+    """SYNOPSIS '<type>' should infer types."""
+    comments = ["Synopsis: <vector> <hash>"]
+    args = ["a", "b"]
+    assert infer_arg_types(comments, args) == [TYPE_VECTOR, TYPE_HASH]
+
+
+def test_arg_types_synopsis_mixed():
+    """SYNOPSIS with mapped and unmapped types."""
+    comments = ["Synopsis: <scalar> <unknown_type>"]
+    args = ["a", "b"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_SCALAR
+    assert result[1] == "unknown_type"
+
+
+def test_arg_types_description_pattern():
+    """Description pattern 'param ... type' should infer types."""
+    comments = ["n ... scalar anotherArgument ... hash"]
+    args = ["n", "anotherArgument"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_HASH]
+
+
+def test_arg_types_description_keyword():
+    """Description with type keyword near param name."""
+    comments = ["n ... vector"]
+    args = ["n"]
+    assert infer_arg_types(comments, args) == [TYPE_VECTOR]
+
+
+def test_arg_types_default_value_scalar():
+    """Default value hint should infer scalar."""
+    comments = ["some comment"]
+    args = ["count = 0"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_SCALAR
+
+
+def test_arg_types_default_value_nil():
+    """Default value hint should infer nil."""
+    comments = ["some comment"]
+    args = ["opt = nil"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_NIL
+
+
+def test_arg_types_default_value_bool():
+    """Default value hint should infer bool."""
+    comments = ["some comment"]
+    args = ["flag = true"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_BOOL
+
+
+def test_arg_types_default_value_hash():
+    """Default value hint should infer hash."""
+    comments = ["some comment"]
+    args = ["opts = {}"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_HASH
+
+
+def test_arg_types_default_value_vector():
+    """Default value hint should infer vector."""
+    comments = ["some comment"]
+    args = ["items = []"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_VECTOR
+
+
+def test_arg_types_no_matches_empty():
+    """No matching patterns should yield empty strings."""
+    comments = ["just a generic comment with no type hints"]
+    args = ["a", "b"]
+    assert infer_arg_types(comments, args) == ["", ""]
+
+
+def test_arg_types_all_strategies():
+    """When inline signature provides all types, stop there."""
+    comments = ["func(scalar, bool) some other text <hash>"]
+    args = ["a", "b"]
+    assert infer_arg_types(comments, args) == [TYPE_SCALAR, TYPE_BOOL]
+
+
+def test_arg_types_partial_match():
+    """Partial matches should leave remaining as empty string."""
+    comments = ["func(scalar)"]
+    args = ["a", "b"]
+    result = infer_arg_types(comments, args)
+    assert result[0] == TYPE_SCALAR
+    assert result[1] == ""

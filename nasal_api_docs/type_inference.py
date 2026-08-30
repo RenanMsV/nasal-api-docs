@@ -223,3 +223,162 @@ def _extract_type_from_description(desc: str) -> str:
         if cleaned in _TYPE_KEYWORDS:
             return _TYPE_KEYWORDS[cleaned]
     return TYPE_UNKNOWN
+
+
+def infer_arg_types(comments: List[str], args: List[str]) -> List[str]:
+    """Infer parameter types from comment patterns.
+
+    Strategies (applied in order):
+    1. Inline signature patterns like ``func_name(type)`` or ``func_name(type1, type2)``
+    2. SYNOPSIS angle-bracket patterns like ``<type>``
+    3. Description patterns like ``param_name ... type_description``
+    4. Default-value hints from arg strings (``param = 0`` → scalar)
+
+    Args:
+        comments: List of cleaned comment strings.
+        args: List of raw argument strings from the parser.
+
+    Returns:
+        List of type strings parallel to ``args``.  Unknown parameters
+        receive an empty string.
+    """
+    if not comments or not args:
+        return [""] * len(args)
+
+    combined = " ".join(comments)
+    arg_names = [a.split("=")[0].strip() for a in args]
+    types: List[str] = [""] * len(args)
+
+    # --- Strategy 1: Inline signature "name(type1, type2, ...)" ---
+    _merge_types(types, _infer_from_inline_signature(combined, arg_names))
+    if all(t for t in types):
+        return types
+
+    # --- Strategy 2: SYNOPSIS angle brackets "<type>" ---
+    _merge_types(types, _infer_from_synopsis(combined, arg_names))
+    if all(t for t in types):
+        return types
+
+    # --- Strategy 3: Description "param_name ... type" ---
+    _merge_types(types, _infer_from_descriptions(combined, arg_names))
+    if all(t for t in types):
+        return types
+
+    # --- Strategy 4: Default values ---
+    _merge_types(types, _infer_from_defaults(args, arg_names))
+
+    return types
+
+
+def _merge_types(target: List[str], source: List[str]) -> None:
+    """Fill empty slots in target from source."""
+    for i in range(min(len(target), len(source))):
+        if not target[i] and source[i]:
+            target[i] = source[i]
+
+
+def _infer_from_inline_signature(text: str, arg_names: List[str]) -> List[str]:
+    """Extract types from patterns like 'door.enable(bool)' or 'func(a, b, c)'."""
+    types: List[str] = [""] * len(arg_names)
+
+    # Find all patterns: identifier(type1, type2, ...)
+    matches = re.findall(r"\b\w+(?:\.\w+)?\s*\(\s*([^)]*)\)", text)
+    for match in matches:
+        raw_types = [t.strip() for t in match.split(",") if t.strip()]
+        if not raw_types:
+            continue
+        for i, raw in enumerate(raw_types):
+            if i < len(arg_names):
+                mapped = _TYPE_KEYWORDS.get(raw.lower())
+                if mapped:
+                    types[i] = mapped
+                else:
+                    types[i] = raw.lower()
+        if all(t for t in types):
+            break
+
+    return types
+
+
+def _infer_from_synopsis(text: str, arg_names: List[str]) -> List[str]:
+    """Extract types from SYNOPSIS angle-bracket patterns like '<type>'."""
+    types: List[str] = [""] * len(arg_names)
+
+    # Find all <type> patterns in order
+    bracket_types = re.findall(r"<(\w+)>", text)
+    if not bracket_types:
+        return types
+
+    for i, raw in enumerate(bracket_types):
+        if i < len(arg_names):
+            mapped = _TYPE_KEYWORDS.get(raw.lower())
+            types[i] = mapped if mapped else raw.lower()
+
+    return types
+
+
+def _infer_from_descriptions(text: str, arg_names: List[str]) -> List[str]:
+    """Extract types from 'param_name ... type_description' patterns."""
+    types: List[str] = [""] * len(arg_names)
+
+    for name in arg_names:
+        if not name:
+            continue
+        # Look for "param_name ... description with type keywords"
+        # Pattern: name followed by ... then description
+        pattern = re.escape(name) + r"\s*\.\.\.(.*?)(?=\w+\s*\.\.\.|$)"
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            desc = match.group(1)
+            mapped = _extract_type_from_description(desc)
+            if mapped != TYPE_UNKNOWN:
+                idx = arg_names.index(name)
+                types[idx] = mapped
+
+    # Also try simple keyword scan per param name
+    for name in arg_names:
+        if not name or types[arg_names.index(name)]:
+            continue
+        # Check if the param name appears near a type keyword
+        idx = arg_names.index(name)
+        escaped = re.escape(name)
+        # Look for "name ... keyword" within a reasonable window
+        pattern = escaped + r"\s*\.\.\.(.*?)(?:\w+\s*\.\.\.|$)"
+        match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
+        if match:
+            window = match.group(1)[:80].lower()
+            for keyword, nasal_type in _TYPE_KEYWORDS.items():
+                if re.search(r'\b' + re.escape(keyword) + r'\b', window):
+                    types[idx] = nasal_type
+                    break
+
+    return types
+
+
+def _infer_from_defaults(args: List[str], arg_names: List[str]) -> List[str]:
+    """Infer types from default values: param = 0 → scalar, param = nil → nil, etc."""
+    types: List[str] = [""] * len(arg_names)
+
+    for i, arg in enumerate(args):
+        if "=" not in arg:
+            continue
+        default_part = arg.split("=", 1)[1].strip()
+        default_value = default_part.split()[0] if default_part.split() else ""
+
+        if default_value in ("nil", "None"):
+            types[i] = TYPE_NIL
+        elif default_value in ("true", "false"):
+            types[i] = TYPE_BOOL
+        elif default_value in ("[]", "()"):
+            types[i] = TYPE_VECTOR
+        elif default_value in ("{}", ""):
+            if default_value == "{}":
+                types[i] = TYPE_HASH
+        elif default_value.startswith('"') or default_value.startswith("'"):
+            types[i] = TYPE_SCALAR
+        elif re.match(r'^\d', default_value) or default_value in ("0", "1"):
+            types[i] = TYPE_SCALAR
+        elif default_value.startswith("func"):
+            types[i] = TYPE_FUNC
+
+    return types
